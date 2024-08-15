@@ -2,7 +2,6 @@
 #pragma once
 
 #include <cstdint>
-#include <format>
 #include <filesystem>
 #include <fstream>
 #include <vector>

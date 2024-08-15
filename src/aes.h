@@ -12,5 +12,5 @@ class Aes {
     void update(const std::vector<u8>& input);
     void finish(std::vector<u8>& output);
 
-    mbedtls_sha256_context threadCtx{};
+    mbedtls_sha256_context context{};
 };

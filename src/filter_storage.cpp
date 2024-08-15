@@ -12,14 +12,11 @@ struct Hash {
         return std::ranges::equal(data, cmp.data);
     }
 
-    explicit operator std::vector<u8>&() {
-        return data;
-    }
     std::vector<u8> data;
 };
 struct HashAsKey {
     std::size_t operator()(const Hash& key) const {
-        std::array<u64, 4> check;
+        std::array<u64, 4> check{};
         std::memcpy(&check[0], &key.data[0], sizeof(check));
 
         return
@@ -72,12 +69,12 @@ void reportDuplicates() {
         const auto& origin{duplicated.origin};
 
         if (list.size() && !is_empty(list.front())) {
-            ss << std::format("{} - Name entry {} with hash {}\n", entry++, origin, arrayToString(first.data));
+            ss << std::format("{} - Found duplicates from: {} ({})\n", entry++, origin, arrayToString(first.data));
         }
 
         for (const auto& all : list) {
             auto created{last_write_time(all)};
-            ss << std::format("\t{} = {}\n", all, created);
+            ss << std::format("\t - {} = {}\n", all, created);
         }
     }
     std::print("{}\n", ss);
